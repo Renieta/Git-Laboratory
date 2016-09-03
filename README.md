@@ -1,2 +1,2 @@
-# Git Lab ^^
-This is a test repo to practice how to use commands in Git.
+# 2016.9.3
+A "git push" practice!
