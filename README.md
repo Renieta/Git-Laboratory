@@ -1,2 +1,2 @@
-# Git Lab ^^
-This is a test repo to practice how to use commands in Git.
+# R programming learning [278]
+Records, notes and homeworks...
