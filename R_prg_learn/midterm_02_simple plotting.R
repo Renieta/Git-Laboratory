@@ -1,0 +1,5 @@
+plot(women$height,women$weight,main="American women: Height vs. Weight",xlab = "Height",ylab = "Weight")
+plot(women$height,women$weight,main="American women: Height vs. Weight",xlab = "Height",ylab = "Weight",type="l")
+hist(women$weight,main="Distribution of American women weight",xlab = "Weight (pound)")
+boxplot(iris$Sepal.Length ~ iris$Species,main="Sepal length by species")
+barplot(table(factor(iris$Petal.Length)),main="Iris counts by petal length", xlab="Petal length",ylab="Iris counts")
