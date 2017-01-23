@@ -1,0 +1,151 @@
+---
+title: "Midterm_03"
+author: 王韵倫
+date: 2017.1.19 [278期]
+output: 
+  html_document:
+    toc: TRUE
+    toc_depth: 2
+    number_sections: FALSE
+    theme: united
+    highlight: pygments
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+---
+
+##### Midterm_03為R程式設計班[278期]第三項作業。其中，將以GitHub Pages呈現ggplot2繪製五種圖形、R markdown撰寫報告之練習結果。
+
+---
+
+## 使用Toy datasets說明
+
+本次報告所使用之Toy datasets如下：
+
+- women：美國女性平均身高與體重，樣本數為15。(in package "datasets")
+- trees：黑櫻桃樹之周長、高度和體積，樣本數為31。(in package "datasets")
+- sleep：兩組學生額外睡眠時間，各組樣本數為10。(in package "datasets")
+- msleep：哺乳動物睡眠相關資料，樣本數為83。(in package "ggplot2")
+
+---
+
+## 1. 散佈圖 與 線圖之習作
+### 美國女性平均身高與體重比較
+#### 1.1 Toy dataset - "women"呈現
+
+<center>Average Heights and Weights for American Women</center>
+
+```{r women, echo=FALSE}
+women
+```
+
+#### 1.2 圖表呈現
+
+根據1.1資料表內數據，對美國女性平均身高與體重進行**散佈圖**繪製
+
+```{r women2, echo=TRUE}
+library("ggplot2", lib.loc="~/R/win-library/3.3")  
+ggplot(women,aes(x=height,y=weight)) + 
+  geom_point() + 
+  ggtitle("American women: Height vs. Weight") +
+  xlab("Height (inche)") +
+  ylab("Weight (pound)") +
+  geom_smooth(method = "lm")
+
+```
+
+由此可推測，上圖對應之**線圖**如下：
+
+```{r women3, echo=TRUE}
+library("ggplot2", lib.loc="~/R/win-library/3.3")
+ggplot(women,aes(x=height,y=weight)) + 
+  geom_point() + 
+  ggtitle("American women: Height vs. Weight")+
+  xlab("Height (inche)")+
+  ylab("Weight (pound)")+
+  geom_line()
+```
+
+~~為了不要讓報告太空虛，我們就~~總結，在本次觀測樣本數為15的美國女性數據中，其身高與體重呈現正向關係。
+
+---
+
+## 2. 直方圖之習作
+### 黑櫻桃樹周長分佈
+#### 2.1 Toy dataset - "trees"呈現
+
+<center>Girth, Height and Volume for Black Cherry Trees (Summary)</center>
+
+```{r trees, echo=FALSE}
+summary(trees)
+```
+
+#### 2.2 圖表呈現
+
+根據2.1資料表內數據，對黑櫻桃樹周長進行**直方圖**繪製
+
+```{r trees2, echo=TRUE, message=FALSE}
+library("ggplot2", lib.loc="~/R/win-library/3.3")
+ggplot(trees, aes(x = Girth)) +
+  geom_histogram(binwidth = 0.5) +
+  scale_x_continuous(breaks=seq(8, 21, 1)) +
+  ggtitle("Girth for Black Cherry Trees")
+```
+
+---
+
+## 3. 盒鬚圖之習作
+### 統計兩組學生額外睡眠時間
+#### 3.1 Toy dataset - "sleep"呈現
+
+<center>Student's Sleep Data (Summary)</center>
+
+```{r sleep, echo=FALSE}
+summary(sleep)
+```
+
+#### 3.2 圖表呈現
+
+根據3.1資料表內數據，對兩組學生睡眠時間進行**盒鬚圖**繪製
+
+```{r sleep2, echo=TRUE, message=FALSE}
+library("ggplot2", lib.loc="~/R/win-library/3.3")
+ggplot(sleep, aes(x = group, y = extra)) +
+  geom_boxplot() +
+  ggtitle("Extra time for sleep of 2 group of students") +
+  ylab("hours")
+```
+
+總結，雖然資料表中數據有負數，但大致上兩組學生熬夜現象甚小；另外，第二組學生額外睡眠時間較長（平均數較大），且彼此差異較大。
+
+---
+
+## 4. 長條圖之習作
+### 哺乳動物睡眠時間之比較
+#### 4.1 Toy dataset - "msleep"呈現
+
+<center>An updated and expanded version of the mammals sleep dataset (Summary)</center>
+
+```{r msleep, echo=FALSE}
+library("ggplot2", lib.loc="~/R/win-library/3.3")
+summary(msleep)
+```
+
+#### 4.2 圖表呈現
+
+根據4.1資料表內數據，對各種哺乳動物一天總睡眠時間進行**長條圖**繪製
+
+```{r msleep2, echo=TRUE, message=FALSE}
+library("ggplot2", lib.loc="~/R/win-library/3.3")
+ggplot(msleep, aes(x= name,y= sleep_total)) + 
+  ggtitle("Length of time to sleep in mammals") +
+  xlab("Species") +
+  ylab("hours") +
+  geom_bar(stat = "identity",width = 0.6) +
+  theme(axis.text.x = element_text(size = 8,angle = 90))
+```
+
+總結，哺乳動物中，總睡眠時間最短之生物為[<span style="color: #ffd700; font-family: Arial; font-size: 1.5em">Giraffe</span>](https://en.wikipedia.org/wiki/Giraffe)，一天共睡1.9小時；時間最長的為[<span style="color: #8b4513; font-family: Arial; font-size: 1.5em">Little brown bat</span>](https://en.wikipedia.org/wiki/Little_brown_bat)，則一天共睡19.9小時。
